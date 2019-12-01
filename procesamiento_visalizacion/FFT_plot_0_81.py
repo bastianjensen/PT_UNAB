@@ -160,7 +160,38 @@ def generar_FFT(data_array, input_file_name, axis_x_label, axis_y_label):
 
 print("El modulo FFT_plot ha sido ejecutado correctamente")
 
+
+
+
+
+
+
+
+
+##my_file = open("radio_data_sun_copy.csv", "r")
+
+my_data = np.loadtxt('radio_data_sun_copy_CORRECTED.csv', comments = '#', delimiter=',')
+
+
+
+
+promedio = np.mean(my_data[0:7000])
+
+
+
+## divide cada elemento del array por media
+data_array_x = my_data / promedio
+
+
+
+generar_FFT(data_array_x[0:7000], "Datos crudos", "frecuencia (Hz)", "Intensidad (mA)")
+
 ## 	LEE ARCHIVOS TXT
+
+
+
+
+
 
 """
 import numpy as np
