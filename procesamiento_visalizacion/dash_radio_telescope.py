@@ -54,10 +54,18 @@ from dash.dependencies import Input, Output
 
 import pandas as pd
 #https://raw.githubusercontent.com/bastianjensen/PT_UNAB/master/radio_data_sun_MEDIA_10000.csv
-df = pd.read_csv('https://raw.githubusercontent.com/bastianjensen/PT_UNAB/master/radio_data_sun_MEDIA_10000.csv')  
+df = pd.read_csv('https://raw.githubusercontent.com/bastianjensen/PT_UNAB/procesamiento/procesamiento_visalizacion/radio_data_sun_DATE_keys.csv')  
 #df = pd.read_csv('https://raw.githubusercontent.com/bastianjensen/PT_UNAB/procesamiento/radio_data_sun_CONVERTED_TO_DATE.csv')  
 
 #df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv')
+
+
+
+
+
+
+
+
 
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -68,10 +76,10 @@ app.layout = html.Div([
     dcc.Graph(id='graph-with-slider'),
     dcc.Slider(
         id='year-slider',
-        min=df['year'].min(),
-        max=df['year'].max(),
-        value=df['year'].min(),
-        marks={str(year): str(year) for year in df['year'].unique()},
+        min=df['date'].min(),
+        max=df['date'].max(),
+        value=df['date'].min(),
+        marks={str(date): str(date) for date in df['date'].unique()},
         step=None
     )
 ])
@@ -81,14 +89,14 @@ app.layout = html.Div([
     Output('graph-with-slider', 'figure'),
     [Input('year-slider', 'value')])
 def update_figure(selected_year):
-    filtered_df = df[df.year == selected_year]
+    filtered_df = df[df.date == selected_year]
     traces = []
-    for i in filtered_df.continent.unique():
-        df_by_continent = filtered_df[filtered_df['continent'] == i]
+    for i in filtered_df.date.unique():
+        df_by_continent = filtered_df[filtered_df['date'] == i]
         traces.append(dict(
-            x=df_by_continent['gdpPercap'],
-            y=df_by_continent['lifeExp'],
-            text=df_by_continent['country'],
+            x=df_by_continent['date'],
+            y=df_by_continent['variation'],
+            text=df_by_continent['signal'],
             mode='markers',
             opacity=0.7,
             marker={
@@ -101,15 +109,16 @@ def update_figure(selected_year):
     return {
         'data': traces,
         'layout': dict(
-            xaxis={'type': 'log', 'title': 'GDP Per Capita',
-                   'range':[2.3, 4.8]},
-            yaxis={'title': 'Life Expectancy', 'range': [20, 90]},
+            xaxis={'type': 'line', 'title': 'GDP Per Capita',
+                   'range':[0, -1]},
+            yaxis={'title': 'Life Expectancy', 'range': [0, 1024]},
             margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
             legend={'x': 0, 'y': 1},
             hovermode='closest',
             transition = {'duration': 500},
         )
     }
+
 
 
 if __name__ == '__main__':
