@@ -27,3 +27,8 @@ def eliminar_errores(raw_file_name, corrected_file_name, len_line):
 
 
 ##eliminar_errores("radio_data_sun_copy.csv", "corregido.csv", 4)
+    
+
+
+## eliminar_errores('radio_data_sun_2.csv', 'Datos_nov_30_dic_3_DATE.csv',4)
+    ## genera un archivo en que elimina datos corruptos, pero sin convertir datos

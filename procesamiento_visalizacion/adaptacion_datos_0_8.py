@@ -86,3 +86,4 @@ def adaptar_datos(input_file_name):
 
 
 print("OK:	Los datos han sido transformados desde un archivo crudo a un archivo procesable")
+
