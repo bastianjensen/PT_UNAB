@@ -15,3 +15,12 @@ df = pd.read_csv(url)   ## lee un archivo CSV de github
 
 print(df.head(5))       ## imprime las primeras X lineas
 
+
+
+
+
+
+#from IPython.display import IFrame
+#IFrame(src= "https://dash-simple-apps.plotly.host/dash-multiplesubplot/", width="100%", height="950px", frameBorder="0")
+
+

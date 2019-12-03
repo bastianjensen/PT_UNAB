@@ -15,7 +15,7 @@ import scipy.fftpack
 
 
 
-my_data = np.loadtxt('Datos_nov_30_dic_3_MEDIA_10000.csv', comments = '#', delimiter=',')
+my_data = np.loadtxt('radio_data_sun_copy_CORRECTED.csv', comments = '#', delimiter=',')
   
 
 time = my_data[:,0]

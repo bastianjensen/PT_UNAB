@@ -33,6 +33,8 @@ data_array = list()
 file_name = ""
 
 
+"""
+
 
 def set_N(input_N):
 	N = input_N
@@ -75,7 +77,7 @@ def set_xf(input_xf):
 
 def get_xf():
 	return xf
-
+"""
 
 
 ## funcion repetida
@@ -90,7 +92,15 @@ def conver_data_to_array(extracted_data):
 	for line in extracted_data:
 		data.append(line[file_index])
 
-
+def save_file(xf, yf, file_name):
+    if( len(xf) > len(yf) ):
+        yf = yf[0:len(xf)+1]
+    ## en caso de que el largo de los valores en x sea mayor que los valores en y, x se acorta e iguala a y
+    
+    for i in len(xf):
+        file_name.write(  str(xf[i]) + ',' + str(xy[i]) )
+    
+    
 
 
 
@@ -157,6 +167,7 @@ def generar_FFT(data_array, input_file_name, axis_x_label, axis_y_label):
 
 
 	plt.show()
+    
 
 print("El modulo FFT_plot ha sido ejecutado correctamente")
 
