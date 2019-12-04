@@ -158,6 +158,11 @@ plt.show()
 
 
 
+
+
+
+"""
+
 # Python example - Fourier transform using numpy.fft method
 
 import numpy as np
@@ -297,3 +302,6 @@ axis[3].set_ylabel('Amplitude')
  
 
 plotter.show()
+
+
+"""

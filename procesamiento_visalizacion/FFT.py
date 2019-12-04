@@ -20,6 +20,7 @@ url = 'https://raw.githubusercontent.com/bastianjensen/PT_UNAB/procesamiento/pro
 df = pd.read_csv(url)   ## lee un archivo CSV de github
 
 print(df.head(5))       ## imprime las primeras X lineas
+## obtener fila = var_name.get("header")
 
 
 
