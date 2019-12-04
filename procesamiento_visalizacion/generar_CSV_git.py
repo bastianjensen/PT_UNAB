@@ -40,12 +40,17 @@ i = 0
 start_date = dia_0
 end_date = dia_n
 
-while (start_date <= end_date):
+while (start_date < end_date):  ## si es igual al ultimo dato registrado (criterio a partir de Date), termina el ciclo
     
     media_battery = 0
     media_signal = 0
     media_variation = 0
+    
     contador_valores = 0
+    
+    ## archivo generado por hora
+    local_file_name = input_file_name.replace('.csv', '_' + str(start_date.year) + '_' + str(start_date.month) + '_' + str(start_date.hour) + 'HORA.csv')
+    
     
     while(datetime.strptime(global_file.get('date')[i], '%Y-%m-%d %H:%M:%S.%f').hour < start_date.hour + 1 and datetime.strptime(global_file.get('date')[i], '%Y-%m-%d %H:%M:%S.%f').hour <= end_date)
         #date = datetime.strptime(day, '%Y-%m-%d %H:%M:%S.%f')
@@ -56,6 +61,7 @@ while (start_date <= end_date):
         media_battery += battery
         media_signal += signal
         media_variation += variation
+        
         contador_valores += 1
         
         i += 1  ## incrementa contador
@@ -64,6 +70,7 @@ while (start_date <= end_date):
     media_battery /= contador_valores
     media_signal /= contador_valores
     media_variation /= contador_valores
+    
     contador_valores = 0
     
     ## actualiza el valor del Date inicial para la siguiente iteracion
