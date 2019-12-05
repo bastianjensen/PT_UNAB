@@ -9,11 +9,15 @@ import pandas as pd
 from datetime import datetime, date
 import datetime
 import numpy as np
+import shutil
 
 
 
-def run(input_file_name):
+def run(my_input_file_name):
     pass
+
+input_file_name = "Datos_nov_30_dic_3_MEDIA_10000.csv"  #my_input_file_name
+
 
 ## abro solamente una vez el archivo y almaceno los datos en vriables para no ejecutar lectura en cada iteraccion
 date_data = global_file.get('date')
@@ -72,6 +76,8 @@ media_por_hora_file.write("date,battery,signal,variation\n")
 
 
 
+## escribir archivo de secuencia temporal, copiar input_file_name a secuencia_temporal.csv
+shutil.copy(input_file_name, "secuencia_temporal.csv")
 
 
 
@@ -98,7 +104,44 @@ for i in range(len(rango_una_hora_date)-2):
     
     media_por_hora_file.write(line)
     
+    
+    
+    ## agrego los FFT
+    if(0 < rango_una_hora_date[i].hour < 1):
+        ## si el rango se encuentra entre las 00:00 y 01:00 AM
+        global_file[start_index:end_index]
+        
+    elif(6 < rango_una_hora_date[i].hour < 7):
+        ## si el rango se encuentra entre las 00:00 y 01:00 AM
+        global_file[start_index:end_index]
+        
+    elif(12 < rango_una_hora_date[i].hour < 13):
+        ## si el rango se encuentra entre las 00:00 y 01:00 AM
+        global_file[start_index:end_index]
+        
+    elif(18 < rango_una_hora_date[i].hour < 19):
+        ## si el rango se encuentra entre las 00:00 y 01:00 AM
+        global_file[start_index:end_index]
+        
+    
+    
+    
+    
     i += 1
+
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 """
 for date_limite in rango_una_hora_date[1:]:
     print("entra en el for")
