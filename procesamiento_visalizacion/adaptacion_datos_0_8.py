@@ -24,7 +24,7 @@ def adaptar_datos(input_file_name):
 	local_battery = 0
 	local_signal = 0
 	local_variation = 0
-	media_range = 10000
+	media_range = 5000
 
 
 	## Lectura de archivo

@@ -2,7 +2,8 @@
 from adaptacion_datos_0_8 import *
 from reducir_ruido_0_8 import *
 from corrector_de_formato import *
-from FFT_plot_0_81 import *
+#from FFT_plot_0_81 import *
+from generar_CSV_git import *
 
 datos = ""
 file_name = ""
@@ -83,20 +84,17 @@ def ejec_adaptacion_datos(input_file_name):
 	##	OUTPUT	
 
 def generar_archivo_procesado():
-
-
-	file_name = ask_file_name()
-
-	file_name = ejec_correction_de_formato(file_name)		## reemplaza el nombre por el del archivo corregido
-
-	auto_ejectucion_integrada(file_name)
-
-
-	media_10000_name = ejec_adaptacion_datos(file_name)
+    file_name = ask_file_name()
+    file_name = ejec_correction_de_formato(file_name)		## reemplaza el nombre por el del archivo corregido
+    auto_ejectucion_integrada(file_name)
+    media_10000_name = ejec_adaptacion_datos(file_name)
+    
+    return media_10000_name
 
 
 #generar_archivo_procesado()
 
+"""
 
 def crear_FFT():
 	## a partir del archivo generado en: generar_archivo_procesado(), se produce un grafico FFT
@@ -119,10 +117,16 @@ def crear_FFT():
 
 	generar_FFT(data_array[0:7000], file_name_FFT,axis_x_name, axis_y_name)
 
-
+"""
 
 def cli():
-	opcion = int( input("escriba 1 si desea procesar un archivo crudo, o 2 si prefiere mostrar el grafico FFT de un archivo ya proceado: ") )
+    print("Bienvenido\n")
+    media_10000_name = generar_archivo_procesado()
+    run(media_10000_name)
+    print("\n\n\tSu archivo ha sido procesado con exito")
+    
+    """
+    opcion = int( input("escriba 1 si desea procesar un archivo crudo, o 2 si prefiere mostrar el grafico FFT de un archivo ya proceado: ") )
 	if(opcion == 1):
 		generar_archivo_procesado()
 	elif(opcion == 2):
@@ -130,6 +134,12 @@ def cli():
 	else:
 		print("Error, asegure que el dato ingresado es un numero 1 o 2")
 		cli()
+    """
+    
+    
+    
+cli()
+    
 
 
 
