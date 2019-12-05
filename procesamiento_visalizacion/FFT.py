@@ -24,9 +24,10 @@ print(df.head(5))       ## imprime las primeras X lineas
 
 
 
+
 # How many time points are needed i,e., Sampling Frequency
 
-samplingFrequency   = 100;
+samplingFrequency   = 10;
 
  
 
@@ -46,13 +47,6 @@ beginTime           = 0;
 
 endTime             = 10; 
 
- 
-
-# Frequency of the signals
-
-signal1Frequency     = 4;
-
-signal2Frequency     = 7;
 
  
 
@@ -60,56 +54,28 @@ signal2Frequency     = 7;
 
 time        = np.arange(beginTime, endTime, samplingInterval);
 
- 
-
-# Create two sine waves
-
-amplitude1 = np.sin(2*np.pi*signal1Frequency*time)
-
-amplitude2 = np.sin(2*np.pi*signal2Frequency*time)
 
  
 
 # Create subplot
 
-figure, axis = plotter.subplots(4, 1)
+figure, axis = plotter.subplots(2, 1)
 
 plotter.subplots_adjust(hspace=1)
 
  
 
-# Time domain representation for sine wave 1
-
-axis[0].set_title('Sine wave with a frequency of 4 Hz')
-
-axis[0].plot(time, amplitude1)
-
-axis[0].set_xlabel('Time')
-
-axis[0].set_ylabel('Amplitude')
-
- 
-
- 
-
-# Time domain representation for sine wave 2
-
-axis[1].set_title('Sine wave with a frequency of 7 Hz')
-
-axis[1].plot(time, amplitude2)
-
-axis[1].set_xlabel('Time')
-
-axis[1].set_ylabel('Amplitude')
 
  
 
 # Add the sine waves
 
-amplitude = amplitude1 + amplitude2
+lista = list( df['variation'] )
+
+amplitude = lista
 
  
-
+"""
 # Time domain representation of the resultant sine wave
 
 axis[2].set_title('Sine wave with multiple frequencies')
@@ -119,7 +85,7 @@ axis[2].plot(time, amplitude)
 axis[2].set_xlabel('Time')
 
 axis[2].set_ylabel('Amplitude')
-
+"""
  
 
 # Frequency domain representation
