@@ -121,12 +121,10 @@ def cargar_FFT(file_name):
             eje_x = np.arange(0,10, 10/len(rango))  ## valores en x
             
             fft = np.fft.fft(lista_rango)    ## valores en eje y
-            print(lista_rango[0:10])
-            print(np.fft.fft(lista_rango)[0:10])
-            print(fft[0:10])
+    
             
             for valor in range( len(fft) ):
-                FFT_00_file.write( str(eje_x[valor]) + ',' + str( fft[valor] ) + '\n') 
+                FFT_00_file.write( str(eje_x[valor]) + ',' + str( float(fft[valor]) ) + '\n') 
             
             
         elif(6 < rango_una_hora_date[i].hour <= 7):
