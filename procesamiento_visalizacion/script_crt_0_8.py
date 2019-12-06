@@ -89,7 +89,7 @@ def generar_archivo_procesado():
     auto_ejectucion_integrada(file_name)
     media_10000_name = ejec_adaptacion_datos(file_name)
     
-    return media_10000_name
+    return media_10000_name, file_name
 
 
 #generar_archivo_procesado()
@@ -121,9 +121,15 @@ def crear_FFT():
 
 def cli():
     print("Bienvenido\n")
-    media_10000_name = generar_archivo_procesado()
-    run(media_10000_name)
-    print("\n\n\tSu archivo ha sido procesado con exito")
+    media_10000_name, file_name = generar_archivo_procesado()
+    
+    
+    
+    print("\n\n\nAhora se ejecura run()\n\n")
+    
+    print(file_name)
+    run(media_10000_name, file_name)
+    print("\n\n\tSu archivo ha sido procesado con exitoa")
     
     """
     opcion = int( input("escriba 1 si desea procesar un archivo crudo, o 2 si prefiere mostrar el grafico FFT de un archivo ya proceado: ") )

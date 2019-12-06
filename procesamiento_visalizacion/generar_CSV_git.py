@@ -11,7 +11,7 @@ import datetime
 import numpy as np
 import shutil
 
-
+import matplotlib.pyplot as plt
 
 
 
@@ -101,15 +101,66 @@ def cargar_FFT(file_name):
         
         ## FFT
         
-        Fs = 10     ## frecuencia en Hz
-        T = 1/Fs    ## Periodo
-        
-        
-        
-        
         ## agrego los FFT
         if(0 < rango_una_hora_date[i].hour <= 1):
             ## si el rango se encuentra entre las 00:00 y 01:00 AM
+            start_index = buscar_indice(rango_una_hora_date[i].strftime('%Y-%m-%d %X.%f'), date_data)
+            end_index = buscar_indice(rango_una_hora_date[i+1].strftime('%Y-%m-%d %X.%f'), date_data)
+    
+        
+            rango = global_file[start_index:end_index]
+            
+            if(len(rango) > 2000 ):
+                lista_rango = rango['variation'][0:2000]#[0:2000]
+            else:
+                lista_rango = rango['variation']
+            lista_rango = np.array(lista_rango)
+            lista_rango = lista_rango.astype(int)
+            
+            eje_x = np.arange(0,10, 10/len(rango))  ## valores en x
+            
+            fft = np.fft.fft(lista_rango)    ## valores en eje y
+    
+            import scipy as sy
+            import scipy.fftpack as syfp
+            from scipy.fftpack import fft, fftfreq
+            
+            
+            N = 2000
+            T = 1/10.0
+            x = np.linspace(0.0,N*T, N)
+            y = np.array(global_file['variation'])
+            y = y.astype(int)
+            #y = y / np.mean(y)
+            #y = y.astype(int)
+            yf = fft(y)
+            xf = np.linspace(0.0, 1/(2.0*T), N//2)
+            
+            eje_x = xf
+            eje_y = 2.0/N * np.abs(yf[0:N//2])
+            
+            eje_x = eje_x[1:]
+            eje_y = eje_y[1:]
+            
+            
+            
+            
+            plt.plot(eje_x, eje_y)
+            
+            plt.show()
+            
+            
+            for valor in range( len(eje_x) ):
+               FFT_00_file.write( str(eje_x[valor]) + ',' + str( eje_y[valor] ) + '\n') 
+          
+            print(nombre_FFT_00 + " ha sido generado exitosamente.")
+    
+            
+        elif(6 < rango_una_hora_date[i].hour <= 7):
+            ## si el rango se encuentra entre las 00:00 y 01:00 AM
+            start_index = buscar_indice(rango_una_hora_date[i].strftime('%Y-%m-%d %X.%f'), date_data)
+            end_index = buscar_indice(rango_una_hora_date[i+1].strftime('%Y-%m-%d %X.%f'), date_data)
+        
             rango = global_file[start_index:end_index]
             if(len(rango) > 2000 ):
                 lista_rango = rango['variation'][0:2000]#[0:2000]
@@ -122,53 +173,140 @@ def cargar_FFT(file_name):
             
             fft = np.fft.fft(lista_rango)    ## valores en eje y
     
-            
-            for valor in range( len(fft) ):
-                FFT_00_file.write( str(eje_x[valor]) + ',' + str( float(fft[valor]) ) + '\n') 
-            
-            
-        elif(6 < rango_una_hora_date[i].hour <= 7):
-            ## si el rango se encuentra entre las 00:00 y 01:00 AM
-            rango = global_file[start_index:end_index]
-            lista_rango = rango['variation']
-            
-            eje_x = np.arange(0,10, 10/len(rango))  ## valores en x
-            
-            fft = np.fft.fft(lista_rango)    ## valores en eje y
+            import scipy as sy
+            import scipy.fftpack as syfp
+            from scipy.fftpack import fft, fftfreq
             
             
-            for valor in range( len(fft) ):
-                FFT_06_file.write( str(eje_x[valor]) + ',' + str( float(fft[valor]) ) + '\n') 
+            N = 2000
+            T = 1/10.0
+            x = np.linspace(0.0,N*T, N)
+            y = np.array(global_file['variation'])
+            y = y.astype(int)
+            #y = y / np.mean(y)
+            #y = y.astype(int)
+            yf = fft(y)
+            xf = np.linspace(0.0, 1/(2.0*T), N//2)
             
+            eje_x = xf
+            eje_y = 2.0/N * np.abs(yf[0:N//2])
+            
+            eje_x = eje_x[1:]
+            eje_y = eje_y[1:]
+            
+            
+            
+            
+            plt.plot(eje_x, eje_y)
+            
+            plt.show()
+            
+            
+            for valor in range( len(eje_x) ):
+               FFT_06_file.write( str(eje_x[valor]) + ',' + str( eje_y[valor] ) + '\n') 
+          
+            print(nombre_FFT_06 + " ha sido generado exitosamente.")
             
         elif(12 < rango_una_hora_date[i].hour <= 13):
             ## si el rango se encuentra entre las 00:00 y 01:00 AM
+            start_index = buscar_indice(rango_una_hora_date[i].strftime('%Y-%m-%d %X.%f'), date_data)
+            end_index = buscar_indice(rango_una_hora_date[i+1].strftime('%Y-%m-%d %X.%f'), date_data)
+            
             rango = global_file[start_index:end_index]
-            lista_rango = rango['variation']
+            if(len(rango) > 2000 ):
+                lista_rango = rango['variation'][0:2000]#[0:2000]
+            else:
+                lista_rango = rango['variation']
+            lista_rango = np.array(lista_rango)
+            lista_rango = lista_rango.astype(int)
             
             eje_x = np.arange(0,10, 10/len(rango))  ## valores en x
             
             fft = np.fft.fft(lista_rango)    ## valores en eje y
+    
+            import scipy as sy
+            import scipy.fftpack as syfp
+            from scipy.fftpack import fft, fftfreq
             
             
-            for valor in range( len(fft) ):
-                FFT_12_file.write( str(eje_x[valor]) + ',' + str( float(fft[valor]) ) + '\n') 
+            N = 2000
+            T = 1/10.0
+            x = np.linspace(0.0,N*T, N)
+            y = np.array(global_file['variation'])
+            y = y.astype(int)
+            #y = y / np.mean(y)
+            #y = y.astype(int)
+            yf = fft(y)
+            xf = np.linspace(0.0, 1/(2.0*T), N//2)
+            
+            eje_x = xf
+            eje_y = 2.0/N * np.abs(yf[0:N//2])
+            
+            eje_x = eje_x[1:]
+            eje_y = eje_y[1:]
+
+            
+            plt.plot(eje_x, eje_y)
+            
+            plt.show()
+            
+            
+            for valor in range( len(eje_x) ):
+               FFT_12_file.write( str(eje_x[valor]) + ',' + str( eje_y[valor] ) + '\n') 
+          
+            print(nombre_FFT_12 + " ha sido generado exitosamente.")
             
             
         elif(18 < rango_una_hora_date[i].hour <= 19):
             ## si el rango se encuentra entre las 00:00 y 01:00 AM
+            start_index = buscar_indice(rango_una_hora_date[i].strftime('%Y-%m-%d %X.%f'), date_data)
+            end_index = buscar_indice(rango_una_hora_date[i+1].strftime('%Y-%m-%d %X.%f'), date_data)
+            
             rango = global_file[start_index:end_index]
-            lista_rango = rango['variation']
+            if(len(rango) > 2000 ):
+                lista_rango = rango['variation'][0:2000]#[0:2000]
+            else:
+                lista_rango = rango['variation']
+            lista_rango = np.array(lista_rango)
+            lista_rango = lista_rango.astype(int)
             
             eje_x = np.arange(0,10, 10/len(rango))  ## valores en x
             
             fft = np.fft.fft(lista_rango)    ## valores en eje y
+    
+            import scipy as sy
+            import scipy.fftpack as syfp
+            from scipy.fftpack import fft, fftfreq
             
             
-            for valor in range( len(fft) ):
-                FFT_18_file.write( str(eje_x[valor]) + ',' + str( float(fft[valor]) ) + '\n') 
+            N = 2000
+            T = 1/10.0
+            x = np.linspace(0.0,N*T, N)
+            y = np.array(global_file['variation'])
+            y = y.astype(int)
+            #y = y / np.mean(y)
+            #y = y.astype(int)
+            yf = fft(y)
+            xf = np.linspace(0.0, 1/(2.0*T), N//2)
+            
+            eje_x = xf
+            eje_y = 2.0/N * np.abs(yf[0:N//2])
+            
+            eje_x = eje_x[1:]
+            eje_y = eje_y[1:]
+            
+            
+            plt.plot(eje_x, eje_y)
+            
+            plt.show()
+            
+            
+            for valor in range( len(eje_x) ):
+               FFT_18_file.write( str(eje_x[valor]) + ',' + str( eje_y[valor] ) + '\n') 
+          
+            print(nombre_FFT_18 + " ha sido generado exitosamente.")
         
-        i += 1
+        
 
     
     
@@ -186,14 +324,7 @@ def cargar_medias(file_name):
     battery_data = global_file.get('battery')
     signal_data = global_file.get('signal')
     variation_data = global_file.get('variation')
-    
-    
-    
-    ## generar archivos por rango de hora y por dia
-    ## Dia:[listas_por_hora] -> Dia : [ []. []. [], []]
-    
-    
-       
+         
     
     
     start_date_str = global_file.get('date')[0]
@@ -207,33 +338,9 @@ def cargar_medias(file_name):
     horas = rango_tiempo.seconds/3600
     
     
-    
-    
-    
-    
-    
-    ## nombre de archivos que se cargaran en GitHub para ser leidos con Dash
-    #nombre_FFT_00 = 'FFT_00_00.csv'
-    #nombre_FFT_06 = 'FFT_06_00.csv'
-    #nombre_FFT_12 = 'FFT_12_00.csv'
-    #nombre_FFT_18 = 'FFT_18_00.csv'
+
     nombre_media_por_hora = "media_por_hora.csv"
     
-    
-    ## iniciar escritura y reescribir en caso de existir el archivo
-    """
-    FFT_00_file = open(nombre_FFT_00, 'w')
-    FFT_00_file.write("frecuencia,intensidad\n" )
-    
-    FFT_06_file = open(nombre_FFT_06, 'w')
-    FFT_06_file.write("frecuencia,intensidad\n" )
-    
-    FFT_12_file = open(nombre_FFT_12, 'w')
-    FFT_12_file.write("frecuencia,intensidad\n" )
-    
-    FFT_18_file = open(nombre_FFT_18, 'w')
-    FFT_18_file.write("frecuencia,intensidad\n" )
-    """
     
     media_por_hora_file = open(nombre_media_por_hora, 'w')
     
@@ -269,80 +376,8 @@ def cargar_medias(file_name):
         media_por_hora_file.write(line)
         
         
-        
-        """
-        
-        ## FFT
-        
-        Fs = 10     ## frecuencia en Hz
-        T = 1/Fs    ## Periodo
-        
-        
-        
-        
-        ## agrego los FFT
-        if(0 < rango_una_hora_date[i].hour <= 1):
-            ## si el rango se encuentra entre las 00:00 y 01:00 AM
-            rango = global_file[start_index:end_index]
-            
-            eje_x = np.arange(0,10, 10/len(rango))  ## valores en x
-            
-            fft = np.fft.fft(rango['variation'])    ## valores en eje y
-            
-            
-            
-            for valor in range( len(fft) ):
-                FFT_00_file.write( str(eje_x[valor]) + ',' + str( int(fft[valor]) ) + '\n') 
-            
-            
-        elif(6 < rango_una_hora_date[i].hour <= 7):
-            ## si el rango se encuentra entre las 00:00 y 01:00 AM
-            rango = global_file[start_index:end_index]
-            
-            eje_x = np.arange(0,10, 10/len(rango))  ## valores en x
-            
-            fft = np.fft.fft(rango['variation'])    ## valores en eje y
-            
-            
-            for valor in range( len(fft) ):
-                FFT_06_file.write( str(eje_x[valor]) + ',' + str( int(fft[valor]) ) + '\n') 
-            
-            
-        elif(12 < rango_una_hora_date[i].hour <= 13):
-            ## si el rango se encuentra entre las 00:00 y 01:00 AM
-            rango = global_file[start_index:end_index]
-            
-            eje_x = np.arange(0,10, 10/len(rango))  ## valores en x
-            
-            fft = np.fft.fft(rango['variation'])    ## valores en eje y
-            
-            
-            for valor in range( len(fft) ):
-                FFT_12_file.write( str(eje_x[valor]) + ',' + str( int(fft[valor]) ) + '\n') 
-            
-            
-        elif(18 < rango_una_hora_date[i].hour <= 19):
-            ## si el rango se encuentra entre las 00:00 y 01:00 AM
-            rango = global_file[start_index:end_index]
-            
-            eje_x = np.arange(0,10, 10/len(rango))  ## valores en x
-            
-            fft = np.fft.fft(rango['variation'])    ## valores en eje y
-            
-            
-            for valor in range( len(fft) ):
-                FFT_18_file.write( str(eje_x[valor]) + ',' + str( int(fft[valor]) ) + '\n') 
-            
-            
-        """
-        
-        
-        
-        i += 1
-
-
     
 def run(my_input_file_name, my_long_file_name):
+    cargar_FFT(my_long_file_name)
+    #cargar_medias(my_input_file_name)
     
-    
-    pass

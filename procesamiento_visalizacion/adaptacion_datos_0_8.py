@@ -21,6 +21,7 @@ def adaptar_datos(input_file_name):
 
 	media_file_10000_name = file_name.replace(".csv", "_MEDIA_10000.csv")	## media por cada 10.000 datos
 	media_file_10000 = open(media_file_10000_name, "w")
+    
 	local_battery = 0
 	local_signal = 0
 	local_variation = 0
@@ -32,7 +33,9 @@ def adaptar_datos(input_file_name):
 	#print("el nombre de archivo es: " + file_name)
 	data = open(file_name, "r")
 	converted_to_date_file = open( new_file, "w")
-
+	media_file_10000.write("date,battery,signal,variation\n")
+	converted_to_date_file.write("date,battery,signal,variation\n")
+        
 	i = 0
 	## Conversión de timestramp a date
 	for line in data:
