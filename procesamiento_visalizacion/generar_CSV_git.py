@@ -379,5 +379,5 @@ def cargar_medias(file_name):
     
 def run(my_input_file_name, my_long_file_name):
     cargar_FFT(my_long_file_name)
-    #cargar_medias(my_input_file_name)
+    cargar_medias(my_input_file_name)
     
