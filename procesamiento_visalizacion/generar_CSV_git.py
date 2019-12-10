@@ -145,12 +145,12 @@ def cargar_FFT(file_name):
             
             
             
-            plt.plot(eje_x, eje_y)
+            #plt.plot(eje_x, eje_y)
             
-            plt.show()
+            #plt.show()
             
             
-            for valor in range( len(eje_x) ):
+            for valor in range( len(eje_x) -2):
                FFT_00_file.write( str(eje_x[valor]) + ',' + str( eje_y[valor] ) + '\n') 
           
             print(nombre_FFT_00 + " ha sido generado exitosamente.")
@@ -197,12 +197,12 @@ def cargar_FFT(file_name):
             
             
             
-            plt.plot(eje_x, eje_y)
+            #plt.plot(eje_x, eje_y)
             
-            plt.show()
+            #plt.show()
             
             
-            for valor in range( len(eje_x) ):
+            for valor in range( len(eje_x) -2):
                FFT_06_file.write( str(eje_x[valor]) + ',' + str( eje_y[valor] ) + '\n') 
           
             print(nombre_FFT_06 + " ha sido generado exitosamente.")
@@ -246,12 +246,12 @@ def cargar_FFT(file_name):
             eje_y = eje_y[1:]
 
             
-            plt.plot(eje_x, eje_y)
+            #plt.plot(eje_x, eje_y)
             
-            plt.show()
+            #plt.show()
             
             
-            for valor in range( len(eje_x) ):
+            for valor in range( len(eje_x) -2):
                FFT_12_file.write( str(eje_x[valor]) + ',' + str( eje_y[valor] ) + '\n') 
           
             print(nombre_FFT_12 + " ha sido generado exitosamente.")
@@ -296,12 +296,12 @@ def cargar_FFT(file_name):
             eje_y = eje_y[1:]
             
             
-            plt.plot(eje_x, eje_y)
+            #plt.plot(eje_x, eje_y)
             
-            plt.show()
+            #plt.show()
             
             
-            for valor in range( len(eje_x) ):
+            for valor in range( len(eje_x) -2):
                FFT_18_file.write( str(eje_x[valor]) + ',' + str( eje_y[valor] ) + '\n') 
           
             print(nombre_FFT_18 + " ha sido generado exitosamente.")
@@ -377,7 +377,10 @@ def cargar_medias(file_name):
         
         
     
-def run(my_input_file_name, my_long_file_name):
-    cargar_FFT(my_long_file_name)
-    cargar_medias(my_input_file_name)
+def run(file_name, converted_to_date):
+    print("archivos FFT van a ser creados a partir de " + converted_to_date)
+    cargar_FFT(converted_to_date)
+    print("archivos medias_10000 van a ser creados a partir de " + file_name)
+    
+    cargar_medias(file_name)
     

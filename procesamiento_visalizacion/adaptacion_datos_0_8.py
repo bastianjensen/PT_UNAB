@@ -83,7 +83,7 @@ def adaptar_datos(input_file_name):
 		except:
 			pass
 	print("Datos enviados desde el modulo: adaptacion_datos_0_8")
-	return (media_file_10000_name)	## retorna el nombre del archivo creado
+	return (media_file_10000_name, str(converted_to_date_file.name))	## retorna el nombre del archivo creado
 
 ##adaptar_datos("radio_data_sun_copy.csv")
 

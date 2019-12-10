@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 ## UI por linea de comando
 from adaptacion_datos_0_8 import *
 from reducir_ruido_0_8 import *
@@ -13,42 +16,43 @@ def read_file(file_name, index):
 	## lee un archivo y retorna un array
 	## si se quiere solo los elementos de un indice en cada linea, ingresar valor index diferente de -1
 	## si se quiere obtener todos los valores del archivo, ingresar indice = -1
+    print(read_file())
+    
+    file_readed = open(file_name, "r")
+    data_array = list()
 
-	file_readed = open(file_name, "r")
-	data_array = list()
-
-	for linea in file_readed:
-		local_line = linea.strip().split(',')		## genero un array con la linea
-
-		if(index != -1 and len(local_line) > 0):
-			try:
-				data_array.append( int(local_line[index]) )
-			except:
-				pass
-		else:
-			try:
-				data_array.append( local_line )
-			except:
-				pass
-
-	return data_array
+    for linea in file_readed:
+        al_line = linea.strip().split(',')		## genero un array con la linea
+        
+        if(index != -1 and len(local_line) > 0):
+            try:
+                y.append( int(local_line[index]) )
+            except:
+                pass
+        else:
+            try:
+                data_array.append( local_line )
+            except:
+                pass
+        
+        return data_array
 
 
 def ask_file_name():
-	file_name = str( input("ingrese nombre del archivo en crudo que desea procesar (debe tener extensión CSV:" ) )
+	file_name = str( input("ingrese nombre del archivo en crudo que desea procesar (debe tener extension CSV: " ) )
 
-	print("file_name 1 = " + file_name)
+	print("el nombre de archivo ingresado es: " + file_name)
 
 	return file_name
 
 def ejec_correction_de_formato(input_file_name):
 	## ejecuta script que se encarga de eliminar lineas erroneas
-
-	len_line = 4																	## cantidad de datos separados por coma en cada linea
-	corrected_file_name = input_file_name.replace(".csv", "_CORRECTED.csv")
-	eliminar_errores(input_file_name, corrected_file_name, len_line)
-
-	return(corrected_file_name)
+    print("\n\nejec_correction_de_formato() - " + input_file_name)
+    len_line = 4																	## cantidad de datos separados por coma en cada linea
+    corrected_file_name = input_file_name.replace(".csv", "_CORRECTED.csv")
+    eliminar_errores(input_file_name, corrected_file_name, len_line)
+    print("retorna: " + corrected_file_name)
+    return(corrected_file_name)
 
 
 ## procesamiento de datos (reducción de ruido y otros algoritmos)
@@ -57,7 +61,7 @@ def reducir_ruido():
 
 	##	OUTPUT	
 
-	print ("Ingresando a reducir_ruido()")
+	print ("\n\nreducir_ruido()")
 	auto_ejectucion_integrada()
 
 
@@ -65,15 +69,13 @@ def reducir_ruido():
 def ejec_adaptacion_datos(input_file_name):
 	##	INPUT	lee una lista de datos crudos compuesto por una fecha en timestramp, y dos valores de bateria y signal
 	##	(float) Timestramp, (float) Signal, (float) Battery, (float) Variation
-	print("ingresando a ejec_adaptacion_datos()")
-	media_10000_name = adaptar_datos(input_file_name)
-	print(str(datos[:100]) + "\nlisto...")
+	print("\n\nejec_adaptacion_datos() - input_file_name : " + input_file_name)
+	media_10000_name, converted_to_date = adaptar_datos(input_file_name)
+	print("retorna :" + media_10000_name + "\t" + converted_to_date)
 
 	##	OUTPUT	retorna una media por cada 10K datos
 	##	(Date) Date, (int) Signal, (int) Battery, (int) Variation
-	return media_10000_name
-
-
+	return media_10000_name, converted_to_date
 
 
 
@@ -84,12 +86,13 @@ def ejec_adaptacion_datos(input_file_name):
 	##	OUTPUT	
 
 def generar_archivo_procesado():
+    print("\n\ngenerar_archivo_procesado()")
     file_name = ask_file_name()
     file_name = ejec_correction_de_formato(file_name)		## reemplaza el nombre por el del archivo corregido
     auto_ejectucion_integrada(file_name)
-    media_10000_name = ejec_adaptacion_datos(file_name)
-    
-    return media_10000_name, file_name
+    media_10000_name, converted_to_date = ejec_adaptacion_datos(file_name)
+    print("retorna: media_1000_name = " + media_10000_name + "\nfile_name = " + file_name + "nconverted_to_date " + converted_to_date)
+    return media_10000_name, file_name, converted_to_date
 
 
 #generar_archivo_procesado()
@@ -121,14 +124,17 @@ def crear_FFT():
 
 def cli():
     print("Bienvenido\n")
-    media_10000_name, file_name = generar_archivo_procesado()
+    media_10000_name, file_name, converted_to_date = generar_archivo_procesado()
     
     
     
-    print("\n\n\nAhora se ejecura run()\n\n")
+    print("\n\nrun()")
     
-    print(file_name)
-    run(media_10000_name, file_name)
+    print("file_name: " + file_name)
+    print("media_10000_name: " + media_10000_name)
+    print("converted_to_date: " +converted_to_date)
+    #run(media_10000_name, file_name)
+    run(file_name, converted_to_date)
     print("\n\n\tSu archivo ha sido procesado con exitoa")
     
     """
