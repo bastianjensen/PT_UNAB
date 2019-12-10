@@ -382,5 +382,5 @@ def run(file_name, converted_to_date):
     cargar_FFT(converted_to_date)
     print("archivos medias_10000 van a ser creados a partir de " + file_name)
     
-    cargar_medias(file_name)
+    cargar_medias(converted_to_date)
     
